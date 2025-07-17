@@ -52,14 +52,15 @@ public class Kutsche {
         }
         int idx = 0;
         int lastIndex = startIndex + anzahl;
+        Pferd remaining = current;
         while (startIndex < lastIndex) {
             out[idx] = current.getDavorPferd();
             Pferd tmp = current.getDavorPferd();
-            current.setDavorPferd(null);
             current = tmp;
             startIndex++;
             idx++;
         }
+        remaining.setDavorPferd(current.getDavorPferd());
         /*Pferd tmp = pferd;
         for (int i = 0; i < out.length; i++) {
             while (tmp != null) {
