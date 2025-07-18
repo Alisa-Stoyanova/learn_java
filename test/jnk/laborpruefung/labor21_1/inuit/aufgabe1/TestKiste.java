@@ -1,10 +1,10 @@
 package jnk.laborpruefung.labor21_1.inuit.aufgabe1;
 
+import jnk.laborpruefung.labor21_1.TestHelpers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
@@ -13,16 +13,7 @@ public class TestKiste {
 
     @Test
     public void testInhaltLeicht() {
-        Assertions.assertDoesNotThrow(() -> klass.getDeclaredField("inhalt"), "Field inhalt doesn't exist");
-        Field inhalt = null;
-        try {
-            inhalt = klass.getDeclaredField("inhalt");
-        } catch (NoSuchFieldException ignored) {}
-        Assertions.assertNotNull(inhalt);
-
-        Assertions.assertEquals(String.class, inhalt.getType(), "Field inhalt is not of String type");
-        Assertions.assertTrue(Modifier.isPrivate(inhalt.getModifiers()), "Field inahlt is not private");
-        Assertions.assertTrue(Modifier.isFinal(inhalt.getModifiers()), "Field inhalt is not final");
+        TestHelpers.checkField(klass,"inhalt", String.class, Modifier.PRIVATE | Modifier.FINAL);
     }
 
     @Test
