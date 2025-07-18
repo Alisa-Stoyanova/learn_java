@@ -45,30 +45,31 @@ public class Kutsche {
         if (anzahl < 0 || startIndex < 0 || getAnzahlPferde() < startIndex + anzahl) {
             return null;
         }
+
         Pferd[] out = new Pferd[anzahl];
         Pferd current = pferd;
-        for (int i = 0; i < startIndex - 1; i++) {
+        Pferd prev = current;
+        for (int i = 0; i < startIndex; i++) {
+            prev = current;
             current = current.getDavorPferd();
         }
-        int idx = 0;
-        int lastIndex = startIndex + anzahl;
-        Pferd remaining = current;
-        while (startIndex < lastIndex) {
-            out[idx] = current.getDavorPferd();
-            Pferd tmp = current.getDavorPferd();
-            current = tmp;
-            startIndex++;
-            idx++;
+
+        Pferd remaining = prev;
+        for(int i = 0; i < anzahl; i++) {
+            Pferd removed = current;
+            Pferd next = removed.getDavorPferd();
+
+            out[i] = removed;
+            removed.setDavorPferd(null);
+            current = next;
         }
-        remaining.setDavorPferd(current.getDavorPferd());
-        /*Pferd tmp = pferd;
-        for (int i = 0; i < out.length; i++) {
-            while (tmp != null) {
-                if (tmp == out[i]) {
-                    tmp.setDavorPferd(null);
-                }
-            }
-        }*/
+
+        if (startIndex == 0) {
+            pferd = current;
+        } else {
+            remaining.setDavorPferd(current);
+        }
+
         return out;
     }
 
