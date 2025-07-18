@@ -49,6 +49,7 @@ public class Kutsche {
         Pferd[] out = new Pferd[anzahl];
         Pferd current = pferd;
         Pferd prev = current;
+
         for (int i = 0; i < startIndex; i++) {
             prev = current;
             current = current.getDavorPferd();
