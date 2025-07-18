@@ -54,7 +54,6 @@ public class Kutsche {
             current = current.getDavorPferd();
         }
 
-        Pferd remaining = prev;
         for(int i = 0; i < anzahl; i++) {
             Pferd removed = current;
             Pferd next = removed.getDavorPferd();
@@ -67,7 +66,7 @@ public class Kutsche {
         if (startIndex == 0) {
             pferd = current;
         } else {
-            remaining.setDavorPferd(current);
+            prev.setDavorPferd(current);
         }
 
         return out;
