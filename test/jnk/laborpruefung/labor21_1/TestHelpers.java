@@ -8,10 +8,12 @@ import java.lang.reflect.Modifier;
 public class TestHelpers {
     public static void checkField(Class<?> klass, String fieldName, Class<?> expectedType, int expectedModifiers) {
         Assertions.assertDoesNotThrow(() -> klass.getDeclaredField(fieldName), String.format("Field %s doesn't exist", fieldName));
-        Field field = null;
+        Field field;
         try {
             field = klass.getDeclaredField(fieldName);
-        } catch (NoSuchFieldException ignored) {}
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException("This should never happen!");
+        }
 
         Assertions.assertEquals(expectedType, field.getType(), String.format("Field %s is not of the expected type", fieldName));
         Assertions.assertEquals(Modifier.toString(expectedModifiers), Modifier.toString(field.getModifiers()), String.format("Field %s doesn't have the right modifiers", fieldName));
