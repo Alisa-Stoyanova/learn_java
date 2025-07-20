@@ -3,6 +3,7 @@ package jnk.laborpruefung.labor21_1.inuit.aufgabe1;
 import jnk.laborpruefung.labor21_1.TestHelpers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.lang.reflect.Modifier;
 
@@ -39,6 +40,27 @@ public class TestKiste {
     public void testZusammenlegenLeicht() {
         TestHelpers.checkMethod(klass, "zusammenlegen", new Class<?>[]{klass}, klass, Modifier.PUBLIC);
 
-        // TODO: the rest of the test (check the arguments and their types)
+        Kiste k1 = new Kiste(4, "Fish");
+        Kiste k2 = new Kiste(2, "Flowers");
+        Kiste k3 = k1.zusammenlegen(k2);
+
+        Assertions.assertEquals(k1.getGroesse()+k2.getGroesse(), k3.getGroesse(), "Size of the new Kiste does not equals sum of it's parts!");
+        Assertions.assertEquals("Kiste mit Fish+Flowers", k3.toString(), "Result of toString() doesn't equal the expected result!");
+    }
+
+    @Test
+    public void testZusammenlegenMittelEins() {
+        TestHelpers.checkMethod(klass, "zusammenlegen", new Class<?>[]{klass}, klass, Modifier.PUBLIC);
+
+        Kiste k1 = new Kiste(4, "Fish");
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> k1.zusammenlegen(null), "Method doesn't throw an exception when receiving null!");
+    }
+
+    @Test
+    public void testZusammenlegenMittelZwei() {
+        TestHelpers.checkMethod(klass, "zusammenlegen", new Class<?>[]{klass}, klass, Modifier.PUBLIC);
+
+        Kiste k1 = new Kiste(4, "Fish");
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> k1.zusammenlegen(null), "Method doesn't throw an exception when receiving null!");
     }
 }

@@ -18,6 +18,6 @@ public class Kiste extends Ding {
             throw new IllegalArgumentException();
         }
 
-        return new Kiste(this.getGroesse() + andere.getGroesse(), String.format("%s+%s", this, andere));
+        return new Kiste(this.getGroesse() + andere.getGroesse(), String.format("%s+%s", this.inhalt, andere.inhalt));
     }
 }
